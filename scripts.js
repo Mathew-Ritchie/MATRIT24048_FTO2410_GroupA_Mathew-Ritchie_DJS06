@@ -31,3 +31,18 @@ names.forEach((name, index) => console.log(`${name}(${provinces[index]})`));
 
 const upperCaseProvinces = provinces.map((province) => province.toUpperCase());
 console.log(upperCaseProvinces);
+
+// Number 3 //
+
+const nameLength = names.map((name) => name.length);
+console.log(nameLength);
+
+// Number 4 //
+
+const provincesSortAlph = provinces.sort();
+console.log(provincesSortAlph);
+
+// Number 5 //
+
+const provincesFilterCape = provinces.filter((province) => !province.includes("Cape"));
+console.log(provincesFilterCape.length);
