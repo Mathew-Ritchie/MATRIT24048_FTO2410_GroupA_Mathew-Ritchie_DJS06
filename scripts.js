@@ -46,3 +46,30 @@ console.log(provincesSortAlph);
 
 const provincesFilterCape = provinces.filter((province) => !province.includes("Cape"));
 console.log(provincesFilterCape.length);
+
+// Number 6 //
+
+const namesWithS = names.map((name) => {
+  return name.split("").some((char) => char === "S");
+});
+console.log(namesWithS);
+
+// Number 7 //
+
+const nameProvinceObject = names.reduce((acc, name, index) => {
+  acc[name] = provinces[index];
+  return acc;
+}, {});
+
+console.log(nameProvinceObject);
+
+// Number 8 //
+
+console.log(
+  products.forEach((item) => item.product),
+  products.filter((item) => item.product.length <= 5),
+  products
+    .filter((item) => item.price !== "" && !isNaN(Number(item.price)))
+    .reduce((total, item) => total + Number(item.price), 0),
+  products.reduce((acc, item) => acc + (acc ? ", " : "") + item.product, "")
+);
