@@ -63,13 +63,59 @@ const nameProvinceObject = names.reduce((acc, name, index) => {
 
 console.log(nameProvinceObject);
 
-// Number 8 //
-
+// Advanced //
+//all in one console.log
 console.log(
-  products.forEach((item) => item.product),
+  // Number 1
+  products.map((item) => item.product),
+  // Number 2
   products.filter((item) => item.product.length <= 5),
+  // Number 3
   products
-    .filter((item) => item.price !== "" && !isNaN(Number(item.price)))
-    .reduce((total, item) => total + Number(item.price), 0),
-  products.reduce((acc, item) => acc + (acc ? ", " : "") + item.product, "")
+    .filter((item) => item.price !== "" && !isNaN(Number(item.price))) // filter out empty strings && if not a number make a number
+    .reduce((total, item) => total + Number(item.price), 0), // Takes filtered list of all numbers and uses reduce to get a total.
+
+  //Number 4
+  products.reduce((acc, item) => acc + (acc ? ", " : "") + item.product, ""), // uses reduce() to add all product names to one string.
+  // Ternary operator used to add a ',' if there is a accumulator or
+  //will set empty string if no accumulator.
+
+  // Number 5
+  `Highest: ${
+    // using template literals and having all logic in ${}.
+    products
+      .filter((item) => item.price !== "" && item.price !== " " && !isNaN(Number(item.price))) //filter removes the products with no prices, or those that cant be converted to a number.
+      .reduce(
+        (acc, item) => {
+          const price = typeof item.price === "string" ? Number(item.price.trim()) : item.price; // Ternary converts strings into numbers or if not a string keep item.price.
+          if (acc.highest === null || price > acc.highest) {
+            acc.highest = price;
+            acc.highestName = item.product;
+          }
+          return acc;
+        },
+        { highest: null, highestName: "" }
+      ).highestName
+  }. 
+  
+  Lowest: ${
+    products
+      .filter((item) => item.price !== "" && item.price !== " " && !isNaN(Number(item.price)))
+      .reduce(
+        (acc, item) => {
+          const price = typeof item.price === "string" ? Number(item.price.trim()) : item.price;
+          if (acc.lowest === null || price < acc.lowest) {
+            acc.lowest = price;
+            acc.lowestName = item.product;
+          }
+          return acc;
+        },
+        { lowest: null, lowestName: "" }
+      ).lowestName
+  }`,
+  //number 6
+  Object.entries(products).reduce((acc, [index, value]) => {
+    acc[index] = { name: value.product, cost: value.price };
+    return acc;
+  }, {})
 );
