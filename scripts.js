@@ -75,7 +75,7 @@ console.log(
   // Number 3
   products
     .filter((item) => item.price !== "" && !isNaN(Number(item.price))) // filter out empty strings && if not a number make a number
-    .reduce((total, item) => total + Number(item.price), 0), // Takes filtered list of all numbers and uses reduce to get a total.
+    .reduce((total, item) => total + Number(item.price), 0), // Takes filtered list of all numbers and uses reduce to get a total value.
 
   //Number 4
   products.reduce((acc, item) => acc + (acc ? ", " : "") + item.product, ""), // uses reduce() to add all product names to one string.
@@ -91,13 +91,14 @@ console.log(
         (acc, item) => {
           const price = typeof item.price === "string" ? Number(item.price.trim()) : item.price; // Ternary converts strings into numbers or if not a string keep item.price.
           if (acc.highest === null || price > acc.highest) {
-            acc.highest = price;
+            // if statement to determine if the current price is higher than the highest price found so far (acc.highest)
+            acc.highest = price; //if the ptice is greater than the acc.highest, then acc.highest becomes the new price.
             acc.highestName = item.product;
           }
           return acc;
         },
-        { highest: null, highestName: "" }
-      ).highestName
+        { highest: null, highestName: "" } // accumulator satrting point.
+      ).highestName // after processing the reduce function would produce an object. using .highest extracts the actual name of the highest product.
   }. 
   
   Lowest: ${
@@ -117,7 +118,10 @@ console.log(
   }`,
   //number 6
   Object.entries(products).reduce((acc, [index, value]) => {
-    acc[index] = { name: value.product, cost: value.price };
+    //using Object.entries to target the key value pairs in the objects and turn each object into an array.
+    //Ruduce method iterates over the array, it takes an accumulator and the current product which is destructured into index and vlaue.
+    acc[index] = { name: value.product, cost: value.price }; // the index is assigned as key and the object extracts values from product and price and reassigns them to name and price.
+
     return acc;
-  }, {})
+  }, {}) // accumulator starts as empty object.
 );
