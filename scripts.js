@@ -99,9 +99,7 @@ console.log(
         },
         { highest: null, highestName: "" } // accumulator satrting point.
       ).highestName // after processing the reduce function would produce an object. using .highest extracts the actual name of the highest product.
-  }. 
-  
-  Lowest: ${
+  }. Lowest: ${
     products
       .filter((item) => item.price !== "" && item.price !== " " && !isNaN(Number(item.price)))
       .reduce(
